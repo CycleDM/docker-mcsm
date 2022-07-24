@@ -1,0 +1,9 @@
+FROM node:16-slim
+RUN apt update && apt install -y git && apt clean -y
+RUN git clone https://github.com/MCSManager/MCSManager-Daemon-Production /opt/docker-mcsm/releases/daemon
+RUN cd /opt/docker-mcsm/releases/daemon && npm i --production --registry=https://registry.npmmirror.com
+
+EXPOSE 24444
+
+WORKDIR /opt/docker-mcsm/releases/daemon
+CMD node app.js

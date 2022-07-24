@@ -1,0 +1,28 @@
+version: "3"
+services:
+    mcsm-web:
+        container_name: mcsm-web
+        build:
+            context: .
+            dockerfile: Dockerfile-web
+        network_mode: "bridge"
+        ports:
+          - "23333:23333"
+        restart: always
+        volumes:
+            - "/root/mcsmanager/releases/web/data:/opt/docker-mcsm/releases/web/data"
+            - "/root/mcsmanager/releases/web/logs:/opt/docker-mcsm/releases/web/logs"
+            - "/root/mcsmanager/releases/daemon/data/Config:/opt/docker-mcsm/releases/daemon/data/Config:ro"
+    mcsm-daemon:
+        container_name: mcsm-daemon
+        build:
+            context: .
+            dockerfile: Dockerfile-daemon
+        network_mode: "bridge"
+        ports:
+          - "24444:24444"
+        restart: always
+        volumes:
+            - "/root/mcsmanager/releases/daemon/data:/opt/docker-mcsm/releases/daemon/data"
+            - "/root/mcsmanager/releases/daemon/logs:/opt/docker-mcsm/releases/daemon/logs"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
