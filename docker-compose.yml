@@ -4,7 +4,7 @@ services:
         container_name: mcsm-web
         build:
             context: .
-            dockerfile: Dockerfile-web
+            dockerfile: Dockerfile-webui
         network_mode: "bridge"
         ports:
           - "23333:23333"
